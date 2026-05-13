@@ -1,0 +1,542 @@
+<html lang="en-GB">
+<head>
+  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FFAvatar: Few-Shot, Feedforward, and Generalizable Avatar Reconstruction</title>
+    <meta name="description" content="FFAvatar: Few-Shot, Feedforward, and Generalizable Avatar Reconstruction">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <meta name="robots" content="all">
+    <meta content="en_EN" property="og:locale">
+    <meta content="website" property="og:type">
+    <meta content="FFAvatar" property="og:title">
+    <meta content="Official page of FFAvatar" property="og:description">
+    <meta content="assets/figures/play_button.png" property="og:image">
+
+    <!-- Add favicon for website icon -->
+    <link rel="icon" type="image/png" href="assets/figures/play_button.png">
+    <link rel="shortcut icon" type="image/png" href="assets/figures/play_button.png">
+
+    <link rel="stylesheet" type="text/css" media="all" href="assets/stylesheets/main_free.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="clarity/clarity.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="assets/stylesheets/tabs.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/foundation.min.css">
+    <link href="assets/fontawesome-free-6.6.0-web/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css"/>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L66G7N8B75"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L66G7N8B75');
+    </script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+    <script src="assets/scripts/navbar.js"></script>  <!-- Comment to remove table of content. -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            "HTML-CSS": {
+              scale: 95,
+              fonts: ["Gyre-Pagella"],
+              imageFont: null,
+              undefinedFamily: "'Arial Unicode MS', cmbright"
+            },
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                processEscapes: true
+              }
+          });
+    </script>
+    <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- Title Page -->
+    <div class="container blog" id="first-content" style="background:
+    radial-gradient(circle at 50% 50%, #9BD4E5 0%, #5FA9D4 80%),
+    linear-gradient(120deg, #A8D5A2 0%, #D6EAC7 50%, transparent 100%),
+    linear-gradient(200deg, #F8C7D8 15%, #E1C4F4 40%, transparent 80%),
+    linear-gradient(45deg, #FFF4D6 0%, #FCEABB 30%, transparent 70%);
+background-blend-mode: overlay, lighten, screen, normal;">
+        <div class="blog-title">
+            <div class="blog-intro" style="width: 200%;">
+                <div>
+                    <style>
+                        .author-link {
+                            color: #2a7ab8;
+                            text-decoration: underline;
+                            text-decoration-color: rgba(42, 122, 184, 0.4);
+                            text-underline-offset: 3px;
+                            transition: all 0.2s ease;
+                        }
+                        .author-link:hover {
+                            color: #1a5a8a;
+                            text-decoration-color: #1a5a8a;
+                        }
+                        .author-sup {
+                            font-size: 0.75em;
+                            margin-left: 2px;
+                            color: #555;
+                        }
+                    </style>
+                    <h1 class="title">FFAvatar: Few-Shot, Feedforward, and Generalizable Avatar Reconstruction</h1>
+                    <p class="author" style="line-height: 1.8; margin-bottom: 0; padding: 0;">
+                        Anonymous Authors
+                    </p>
+                    <p class="abstract" style="text-align: justify;">
+                      Avatar reconstruction has traditionally relied on per‑subject optimization requiring hours of computation or expensive preprocessing that severely limits its scalability. We introduce <em>FFAvatar</em>, a generalizable feedforward framework that reconstructs high-quality, animatable 3D Gaussian head avatars from few-shot unposed portrait images in seconds. <em>FFAvatar</em> fuses information from multiple source images into a unified canonical Gaussian representation through our Multi-View Query-Former network, which is then animated via FLAME parameters predicted end‑to‑end directly from pixels, eliminating the overhead of offline FLAME extraction. We further propose a three-stage training curriculum that achieves both broad generalization and high-fidelity reconstruction: (i) scalable pretraining on extensive monocular video data with over 1M identities to learn strong generalizable priors; (ii) multi-view fine‑tuning on a small but high-quality dataset of 360 degree captures to enhance geometric fidelity and extreme view awareness; and (iii) optional personalization that adapts to specific identities for maximum fidelity within 500 optimization steps. Extensive experiments demonstrate that <em>FFAvatar</em> sets a new standard for identity preservation, geometric consistency, and animation fidelity. On the NeRSemble benchmark, it outperforms the state-of-the-art LAM by a substantial 5.5 PSNR gain. Furthermore, <em>FFAvatar</em> enables real-time deployment, achieving 2 seconds and 10 seconds reconstruction without and with personalization, respectively, and 49 FPS animation on a single NVIDIA A100 GPU.
+                    </p>
+                </div>
+            </div>
+
+            <!-- <div class="blog-cover" style="transform: scale(1.1); transform-origin: center right;">
+                <img class="foreground" src="assets/figures/play_button.png">
+                <img class="background" src="assets/figures/play_button.png">
+            </div> -->
+        </div>
+    </div>
+
+    <!-- <div class="container blog main extra-large white">
+      <div class="feature-cards-responsive">
+        <div class="feature-card">
+          State-of-the-Art Video Editing
+        </div>
+        <div class="feature-card">
+          State-of-the-Art Image Editing
+        </div>
+        <div class="feature-card">
+          Controllable Video Editing
+        </div>
+        <div class="feature-card">
+          Scalable Data Generation Engine
+        </div>
+      </div>
+      <style>
+        .feature-cards-responsive {
+          display: flex;
+          justify-content: center;
+          gap: 32px;
+          margin: 0.5em 0 2em 0;
+          flex-wrap: wrap;
+        }
+        .feature-card {
+          flex: 1 1 0;
+          min-width: 180px;
+          max-width: 320px;
+          border-radius: 14px;
+          box-shadow: 0px 4px 16px 0px rgba(28, 33, 46, 0.09);
+          padding: 1.4em 1em;
+          text-align: center;
+          font-weight: 600;
+          font-size: 1.13em;
+          color: #2c465c;
+          margin-bottom: 16px;
+          background: 
+            radial-gradient(circle at 60% 40%, rgba(155, 212, 229, 0.4) 0%, rgba(95, 169, 212, 0.3) 60%),
+            linear-gradient(120deg, rgba(168, 213, 162, 0.35) 0%, rgba(214, 234, 199, 0.25) 50%, transparent 100%),
+            linear-gradient(200deg, rgba(248, 199, 216, 0.35) 15%, rgba(225, 196, 244, 0.3) 40%, transparent 80%),
+            linear-gradient(45deg, rgba(255, 244, 214, 0.3) 0%, rgba(252, 234, 187, 0.25) 30%, transparent 70%),
+            rgba(255, 255, 255, 0.4);
+          background-blend-mode: overlay, lighten, screen, normal, normal;
+        }
+
+        @media (max-width: 900px) {
+          .feature-cards-responsive {
+            gap: 16px;
+          }
+          .feature-card {
+            min-width: 140px;
+            max-width: 100%;
+            font-size: 1em;
+            padding: 1em 0.7em;
+          }
+        }
+        @media (max-width: 600px) {
+          .feature-cards-responsive {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 14px;
+          }
+          .feature-card {
+            min-width: unset;
+            max-width: 100%;
+            font-size: 0.99em;
+            padding: 1em 0.7em;
+            margin-bottom: 0;
+          }
+        }
+      </style>
+    </div> -->
+
+  <div class="container blog main extra-large white">
+    <div style="width: 80%; margin-left: auto; margin-right: auto;">
+      <img src="assets/figures/ffavatar-teaser.png">
+      <p class="caption" style="font-size: 0.9em; text-align: justify;">
+        <b>FFAvatar</b> generates 3D Gaussian head avatars from few-shot images in a feedforward manner within seconds in one A100 GPU. With more input
+        views, both geometry and texture details improve significantly. FFAvatar can also be directly animated using driving frames without precomputed FLAME
+        parameters, enabling 49 FPS reenactment.
+      </p>
+    </div>
+  </div>
+
+    <!-- <div class="container blog main extra-large white">
+      <div class="rounded-shadow-video" style="border-radius: 16px; width: 100%; overflow: hidden;">
+        <video 
+          src="website_res/spotlight.mp4" 
+          title="EasyV2V Spotlight"
+          controls
+          autoplay
+          muted
+          loop
+          style="width: 60%; height: auto; display: block;">
+        </video>
+      </div>
+      <p class="caption" style="text-align: center; margin-top: 0.5em;">
+        <small>Avatar reconstruction within 10 seconds from FFAvatar</small>
+      </p>
+    </div> -->
+
+
+    <style>
+        .rounded-shadow-video {
+            border-radius: 12px;
+            box-shadow: 0px 4px 20px 0px rgba(28, 33, 46, 0.09), 0px 1px 3px rgba(0,0,0,0.08);
+            overflow: hidden;
+            background: #f7f7fa;
+            transition: box-shadow 0.2s;
+            display: block;
+            /* Remove default video bottom whitespace caused by baseline alignment */
+            vertical-align: top;
+        }
+        .rounded-shadow-video:focus,
+        .rounded-shadow-video:hover {
+            box-shadow: 0px 8px 32px 0px rgba(28, 33, 46, 0.16), 0px 2px 6px rgba(0,0,0,0.10);
+        }
+    </style>
+
+    <!-- <div class="container blog main extra-large gray">
+      <p style="background: #ffe88067; color: #4b4b4b; padding: 0.75em 1.5em; border-radius: 10px; font-weight: bold; font-size: 1.15em; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 0;">
+        ⚠️ <span style="vertical-align:middle;">All videos are compressed for faster loading!</span> ⚠️
+      </p>
+    </div> -->
+
+    <!-- Gallery Start -->
+    <div class="container blog main extra-large gray" id="main-gallery">
+      <h1>FFAvatar Video Examples</h1>
+      <div class="tab-navigation-wrapper">
+        <button class="tab-scroll-btn scroll-left" aria-label="Scroll left">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="tab-navigation">
+          <button class="tab-button active" data-tab="cross-reenact">Cross Reenactment</button>
+          <button class="tab-button" data-tab="avatar-recon">Avatar Reconstruction</button>
+        </div>
+        <button class="tab-scroll-btn scroll-right" aria-label="Scroll right">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Cross Reenactment Tab -->
+      <div class="tab-content active" data-tab-content="cross-reenact">
+        <div class="" data-gallery="cross-reenact">
+          <div class="slide-menu">
+            <ul class="dots">
+              <li class="dot active"></li>
+              <li class="dot"></li>
+              <li class="dot"></li>
+              <li class="dot"></li>
+            </ul>
+          </div>
+          <div class="slide-content" style="display: block;">
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%;">
+              <div style="display: flex; gap: 8px; width: 100%;">
+                <video class="rounded-shadow-video" loop playsinline muted autoplay src="website_res/ffavatar/cross_reenact/animation1.mp4" style="width: 70%;"></video>
+              </div>
+            </div>
+            <p class="caption" style="text-align: center; margin-top: 0.5em;"><small>Face reenactment using a driver video from another subject.</small></p>
+          </div>
+          <div class="slide-content" style="display: none;">
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%;">
+              <div style="display: flex; gap: 8px; width: 100%;">
+                <video class="rounded-shadow-video" loop playsinline muted autoplay src="website_res/ffavatar/cross_reenact/animation3.mp4" style="width: 70%;"></video>
+              </div>
+            </div>
+            <p class="caption" style="text-align: center; margin-top: 0.5em;"><small>Face reenactment using a driver video from another subject.</small></p>
+          </div>
+          <div class="slide-content" style="display: none;">
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%;">
+              <div style="display: flex; gap: 8px; width: 100%;">
+                <video class="rounded-shadow-video" loop playsinline muted autoplay src="website_res/ffavatar/cross_reenact/animation5.mp4" style="width: 70%;"></video>
+              </div>
+            </div>
+            <p class="caption" style="text-align: center; margin-top: 0.5em;"><small>Face reenactment using a driver video from another subject.</small></p>
+          </div>
+          <div class="slide-content" style="display: none;">
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%;">
+              <div style="display: flex; gap: 8px; width: 100%;">
+                <video class="rounded-shadow-video" loop playsinline muted autoplay src="website_res/ffavatar/cross_reenact/animation6.mp4" style="width: 70%;"></video>
+              </div>
+            </div>
+            <p class="caption" style="text-align: center; margin-top: 0.5em;"><small>Face reenactment using a driver video from another subject.</small></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avatar Reconstruction Tab -->
+      <div class="tab-content" data-tab-content="avatar-recon">
+        <div class="" data-gallery="avatar-recon">
+          <div class="slide-menu">
+            <ul class="dots">
+              <li class="dot active"></li>
+            </ul>
+          </div>
+          <div class="slide-content" style="display: block;">
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%;">
+              <div style="display: flex; gap: 8px; width: 100%;">
+                <video class="rounded-shadow-video" loop playsinline muted autoplay src="website_res/ffavatar/avatar_recon/spotlight.mp4" style="width: 50%;"></video>
+              </div>
+            </div>
+            <p class="caption" style="text-align: center; margin-top: 0.5em;"><small>Avatar reconstruction from a single image</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery End -->
+
+    <!-- Results Gallery Start -->
+    <div class="container blog main extra-large white" id="results-gallery">
+      <h1>Results Gallery</h1>
+      <div class="tab-navigation-wrapper">
+        <button class="tab-scroll-btn scroll-left" aria-label="Scroll left">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="tab-navigation">
+          <button class="tab-button active" data-tab="main-results">Main Results</button>
+          <button class="tab-button" data-tab="ablation-study">Ablation Study</button>
+          <button class="tab-button" data-tab="personalization">Personalization Training Dynamics</button>
+        </div>
+        <button class="tab-scroll-btn scroll-right" aria-label="Scroll right">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Main Results Tab -->
+      <div class="tab-content active" data-tab-content="main-results">
+        <div style="width:90%; margin: 0 auto; text-align: center; padding: 2em 0;">
+          <img src="assets/figures/results.png" style="display: block; margin: 0 auto; max-width: 100%;">
+          <p class="caption" style="text-align: left; font-size: 0.9em; margin-top: 1em;">
+            <b>Qualitative comparison with baseline methods.</b> FFAvatar reconstructs high-fidelity 3D head avatars from few-shot unposed images, achieving superior geometric accuracy and texture quality compared to state-of-the-art approaches. Our multi-view framework captures fine details such as facial features, hair structure, and subtle expressions that single-view methods fail to preserve.
+          </p>
+        </div>
+      </div>
+
+      <!-- Ablation Study Tab -->
+      <div class="tab-content" data-tab-content="ablation-study">
+        <div style="width:90%; margin: 0 auto; text-align: center; padding: 2em 0;">
+          <img src="assets/figures/ablation.png" style="display: block; margin: 0 auto; max-width: 100%;">
+          <p class="caption" style="text-align: left; font-size: 0.9em; margin-top: 1em;">
+            <b>Ablation study of key components.</b> We systematically evaluate the impact of our three-stage training curriculum, end-to-end FLAME estimation, and multi-view architecture. Results demonstrate that each component contributes significantly to the final quality, with the full model achieving the best balance between generalization and reconstruction fidelity.
+          </p>
+        </div>
+      </div>
+
+      <!-- Personalization Tab -->
+      <div class="tab-content" data-tab-content="personalization">
+        <div style="width:90%; margin: 0 auto; text-align: center; padding: 2em 0;">
+          <img src="assets/figures/personalization_progress.png" style="display: block; margin: 0 auto; max-width: 100%;">
+          <p class="caption" style="text-align: left; font-size: 0.9em; margin-top: 1em;">
+            <b>Personalization convergence over training steps.</b> Our optional personalization stage rapidly adapts the pretrained model to specific identities. The figure shows progressive improvement in identity preservation and geometric detail over just a few hundred training steps (less than 7 seconds on a single A100 GPU), demonstrating the efficiency of our approach compared to optimization-based methods that require training from scratch.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Results Gallery End -->
+
+    <div class="container blog main extra-large white" style="margin-bottom: 0.75em;">
+        <h1>Quantitative Results</h1>
+        <div class="charts-container">
+            <div class="chart-wrapper">
+                <h3>PSNR Evaluation</h3>
+                <div class="chart-content">
+                    <canvas id="barplot-combined"></canvas>
+                </div>
+                <p class="caption" style="text-align: center; margin-top: 0.5em; margin-bottom: 0;">
+                    <small>Quantitative comparison of our method against baselines.</small>
+                </p>
+            </div>
+            <div class="chart-wrapper">
+                <h3>SSIM Evaluation</h3>
+                <div class="chart-content">
+                    <canvas id="barplot-combined-ssim"></canvas>
+                </div>
+                <p class="caption" style="text-align: center; margin-top: 0.5em; margin-bottom: 0;">
+                    <small>Quantitative comparison of our method against baselines.</small>
+                </p>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="assets/scripts/charts.js"></script>
+    </div>
+        
+
+    <div class="container blog main extra-large first" id="blog-main">
+        <h1>
+            Introduction
+        </h1>
+        <p class='text'>
+          Recent progress in neural 3D avatar reconstruction 
+          has produced high-quality digital humans, yet these methods remain bottlenecked by the necessity of per-subject optimization requiring hours of computation and  dozens to hundreds of images per identity. This fundamental limitation restricts their utility in practical applications where rapid deployment and minimal subject-specific data are paramount, such as virtual presence and telepresence. 
+        </p>
+        <p class='text'>
+
+          The recent Large Avatar Model (LAM) marks a significant advance by eliminating per-subject optimization: it predicts animatable 3D Gaussian avatars in a single feed-forward pass, achieving unprecedented inference speed across identities. However, <b>LAM has two critical limitations</b>. First, it operates on single-view inputs, which constrains identity preservation and geometric fidelity, particularly for unseen or extreme viewpoints where regions are occluded or poorly observed in the input. This missing information therefore requires being hallucinated by the model, leading to reduced fidelity. Second, LAM depends on expensive precomputed FLAME parameter extraction, which fundamentally limits its scalability to large unconstrained datasets training and thus degrades the generalization of the final model.
+          
+          </p> 
+    </div>
+
+    <div class="container blog main extra-large first" id="contributions">
+        <h1>
+            Contributions
+        </h1>
+        
+        <p class="text">
+          We introduce <b>FFAvatar</b>, a few-shot generalizable feedforward avatar reconstruction framework that reconstructs high-quality, animatable 3D Gaussian head avatars in seconds from 1-N input images of an identity. Our work makes two key contributions:
+        </p>
+
+        <p class="text">
+          <b>1. Multi-View Avatar framework with End-to-end FLAME estimation:</b> Previous state-of-the-art methods rely on camera calibration or external FLAME parameter estimation, which requires expensive preprocessing pipelines. Applying such preprocessing at the scale needed for training would be prohibitively costly under computational budgets. This expensive preprocessing fundamentally limits the ability to scale to large, unconstrained datasets. 
+        </p>
+
+        <div style="width:80%; margin: 0 auto; text-align: center;">
+          <img src="assets/figures/pipeline_cropped.png" style="display: block; margin: 0 auto;">
+          <p class="caption" style="text-align: left; font-size: 0.9em;">
+            <b>FFAvatar</b> pipeline. <b>FFAvatar</b> encodes few-shot input views and decodes to a canonical Gaussian head avatar via a Multi-view Query-Former, where canonical FLAME vertices are used as queries and source frame features are used as keys and values. A FLAME estimator is trained end-to-end to predict per-view expression 𝜓 and pose parameters 𝜃, 𝜋 from driver frames for animation, which removes the need for expensive FLAME preprocessing and thus enables scalable training. Finally, a few-to-many training strategy enhances generalization to unseen expressions and poses by supervising more targets (Driver Frames) from fewer input views (Source Frames).
+          </p>
+        </div>
+
+        <p class="text">
+          Our framework addresses this limitation through two innovations. First, we learn a <b>FLAME Estimator end-to-end</b>—we predict per-view expressions and poses directly from raw pixels through photometric supervision, eliminating external preprocessing and enabling truly scalable, robust avatar reconstruction, as well as streamable avatar animation. Second, our <b>multi-view architecture and few-to-many training objective</b> enables <b>FFAvatar</b> to reconstruct a single, unified canonical Gaussian representation from multiple unposed input images. Unlike prior single-view methods, our architecture processes all input views jointly: image features from multiple viewpoints are aggregated into 3D queries from FLAME canonical vertices, producing a consistent set of canonical Gaussian splatts. By fusing information across multiple viewpoints, our approach achieves superior identity preservation and geometric consistency. <b>FFAvatar</b> is trained with a few-to-many objective: at each step, the model consumes a small conditioning subset of views to reconstruct the canonical avatar, then renders a larger set of target views with different expressions and poses. This training strategy teaches the model to generalize to unseen expressions and viewpoints of the same identity, ensuring robust performance even when only few images are available at inference.
+        </p>
+
+        <p class="text">
+          <b>2. Three-stage training curriculum:</b> Achieving generalization across identities while maintaining high-fidelity reconstruction is nontrivial due to a fundamental dataset dilemma. One could train directly on high-quality 360-degree captured datasets, but these are severely limited in diversity. One of the largest available dataset is Ava256, which contains only 256 identities, causing models to overfit and fail to generalize to unseen identities at inference. Conversely, large-scale in-the-wild video datasets offer abundant multiple frames across identities but lack true multi-view coverage and 360-degree geometric supervision. 
+        </p>
+
+        <div style="width:80%; margin: 0 auto; text-align: center;">
+          <img src="assets/figures/training_pipeline.png" style="display: block; margin: 0 auto;">
+          <p class="caption" style="text-align: left; font-size: 0.9em;">
+            <b>Three-Stage Training</b> of <b>FFAvatar</b>. 
+            Scalable pretraining fosters generalization across unseen identities by training on our collected large-scale multi-faces-per-identity dataset MFHQ-1M, multi-view fine-tuning enhances geometric fidelity by optimizing the pretrained weights on a small-scale 360 degrees multi-view captures (e.g. AVA256), and lightweight personalization efficiently improves identity preservation by a few hundred steps tuning for a target identity in <7 seconds on a single A100 GPU.
+          </p>
+        </div>
+
+        <p class="text">
+          We address this with a progressive three-stage training strategy. As illustrated in the figure above, we begin with <b>scalable pretraining</b> on diverse videos containing numerous identities, where multiple frames of the same person provide varied expressions and viewpoints. Although not truly 360-aware, this stage establishes strong generalization across identities. We then perform <b>multi-view fine-tuning</b> on small but high-quality multi-view datasets to inject geometric fidelity and 360-degree awareness; because the model is already pretrained, we find even a modest dataset like Ava256 suffices to impart multi-view consistency. Finally, we support <b>optional personalization</b>, where our model can rapidly adapt to specific identities in less than 500 steps and 7 seconds on a single A100 GPU, dramatically faster than optimization-based methods that must train from scratch.
+        </p>
+    </div>
+
+<!-- 
+        <p class="text">
+What makes a good instruction-based video editor?
+We argue that three components govern performance: <em>data</em>, <em>architecture</em>, and <em>control</em>.
+This paper analyzes the design space of these components and distills a recipe that works great in practice.
+The result is a lightweight model that reaches state-of-the-art quality while accepting flexible inputs.
+        </p>
+
+        <p class="text">
+Training-free video editors adapt pretrained generators but are fragile and slow.
+Training-based approaches improve stability, yet many target narrow tasks such as ControlNet-style conditioning, video inpainting, or reenactment.
+General instruction-based video editors handle a wider range of edits, yet still lag behind image-based counterparts in visual fidelity and control. We set out to narrow this gap.
+The Figure below motivates our design philosophy: modern video models already know how to transform videos.
+To unlock this emerging capability with minimal adaptation, we conduct a comprehensive investigation into data curation, architectural design, and instruction-control.
+        </p>
+        
+        <div style="width:60%; margin: 0 auto; text-align: center;">
+            <img src="assets/figures/motivation_website.png" style="display: block; margin: 0 auto;">
+            <p class="caption" style="text-align: left;">
+                A pretrained text-to-video model can mimic common editing effects without finetuning. This suggests that much of the "how" of video editing already lives inside modern backbones. 
+            </p>
+        </div>
+
+        <p class="text">
+<b>Data.</b>
+We see three data strategies.
+<em>(A) One generalist model</em> renders all edits and is used to self-train an editor. This essentially requires a single teacher model that already solves the problem in high quality.
+<em>(B) Design and train new experts</em> for specific edit types, then synthesize pairs at scale. This yields higher per-task fidelity and better coverage of hard skills, but training and maintaining many specialists is expensive and slows iteration and adaptation to future base models.
+We propose a new strategy: <em>(C) Select existing experts</em> and compose them.
+We focus on experts with a fast inverse (e.g., edge&#8596;video, depth&#8596;video) and compose more complex experts from them. 
+This makes supervision easy to obtain, and experts are readily available as off-the-shelf models.
+It keeps costs low and diversity high by standing on strong off-the-shelf modules; the drawback is heterogeneous artifacts across experts, which we mitigate through filtering and by favoring experts with reliable inverses.
+Concretely, we combine off-the-shelf video/image experts for stylization, local edits, insertion/removal, and human animation. We also convert image edit pairs into supervision via two routes: single-frame training and pseudo video-to-video (V2V) pairs created by applying the same smooth camera transforms to source and edited images.
+Lifting image-to-image (I2I) data increases scale and instruction variety; its limitation is weak motion supervision, and shared camera trajectories reintroduce temporal structure without changing semantics.
+We further leverage <em>video continuation</em>: we derive V2V pairs from densely captioned text-to-video (T2V) datasets by sampling input clips outside each captioned interval and target clips within it, while converting the caption into an instruction using an LLM.
+Continuation data teaches action and transition edits that are scarce in typical V2V corpora, at the cost of more careful caption-to-instruction normalization.
+We collect and create an extensive set of V2V pairs, the most comprehensive among published works, and conduct a detailed study of how editing capability emerges from each training source.
+        </p>
+
+        <p class="text">
+<b>Architecture.</b>
+Using a pretrained video backbone, we study two strategies to inject the source video: <em>channel concatenation</em> and <em>sequence concatenation</em>.
+Channel concatenation is faster in practice because it uses fewer tokens, but sequence concatenation consistently yields higher edit quality.
+The trade-off is efficiency versus separation: channel concatenation keeps context short but entangles source and target signals, while sequence concatenation costs more tokens but preserves clean roles for each stream, improving instruction following and local detail.
+Our final design adds small, zero-initialized patch-embedding routes for the source video and an edit mask, used for spatiotemporal control of the edit extent. It reuses the frozen video VAE for all modalities and fine-tunes only with LoRA.
+Full finetuning can help when massive, heterogeneous data are available, but it risks catastrophic forgetting and is costly to scale.
+With fewer than 10 million paired videos, LoRA transfers faster, reduces overfitting, and preserves pretrained knowledge while supporting later backbone swaps. Its main downside is a slight loss in potential quality when unlimited data and compute are present.
+We inject the mask by token addition and concatenate tokens from the source and optional reference image along the sequence.
+This approach preserves pretraining benefits, keeps token budgets tight (by not introducing new tokens for the mask), and makes the model easily portable to future backbones.
+Addition for masks is simple and fast; while it carries less capacity than a dedicated mask-token stream, we find it sufficient for precise region and schedule control without context bloat.
+We use an optional reference frame during training and testing to leverage strong image editors when available.
+References boost specificity and style adherence when present; randomly dropping the reference during training keeps the model robust when references are absent or noisy.
+        </p>
+
+        <p class="text">
+<b>Flexible control.</b>
+Prior work explores control by skeletons, segmentation, depth, and masks.
+A key signal is still missing: <em>when</em> the edit happens.
+Users often want an edit to appear gradually (e.g., “set the house on fire starting at 1.5s, then let the flames grow gradually”).
+We unify spatial and temporal control with a single mask video.
+Pixels mark <em>where</em> to edit; frames mark <em>when</em> to edit, and how the effect evolves.
+Alternatives include keyframe prompts or token schedules, which are flexible but harder to author and to align with motion.
+A single mask video is direct, differentiable, and composes well with text and optional references.
+The cost is requiring a mask sequence, which we keep lightweight and editable.
+        </p>
+
+        <p class="text">
+Combining these design choices results in a unified editor, <b>EasyV2V</b>, which supports flexible input combinations, including <em>video + text</em>, <em>video + mask + text</em>, and <em>video + mask + reference + text</em>.
+Despite its simplicity, our recipe consistently improves edit quality, motion, and instruction following over recently published methods.
+In summary, our contributions are:
+<ul>
+    <li>A clarified design space for instruction-based video editing and a consistent strategy across data, architecture, and control that achieves state-of-the-art results.</li>
+    <li>A reusable data engine built from composable experts with trivial inverses, lifted high-quality image edits, and video continuation, with per-expert/per-source ablations.</li>
+    <li>A lightweight architecture that minimally modifies a pretrained video backbone: zero-init patch-embeddings for source and mask, frozen VAE reuse, and LoRA finetuning, plus optional reference frames.</li>
+    <li><em>Temporal control</em> as a first-class signal, unified with spatial control via a single mask video that schedules when edits start and how they evolve.</li>
+</ul>
+        </p> -->
+
+
+    </div>
+
+    <!-- Footer Page -->
+    <footer>
+        <div class="container">
+            <p class="" style="font-size: 0.85em;">
+              FFAvatar - 2026
+            </p>
+        </div>    
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="clarity/clarity.js"></script>    
+    <script src="assets/scripts/main.js"></script>
+    <script src="assets/scripts/tabs.js"></script>
+    </html>
+</body>
