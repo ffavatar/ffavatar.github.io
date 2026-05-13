@@ -1,0 +1,148 @@
+/* Tab Navigation Styles */
+
+/* Reduce spacing for h1 elements that precede tab navigation */
+h1 + .tab-navigation-wrapper {
+    margin-top: 0;
+}
+
+.tab-navigation-wrapper {
+    position: relative;
+    margin: 0 0 0.25rem 0;
+}
+
+.tab-navigation {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    padding: 0.25rem 0;
+    scroll-behavior: smooth;
+}
+
+.tab-navigation::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* Scroll arrow buttons */
+.tab-scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #555;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    font-size: 14px;
+    z-index: 10;
+}
+
+.tab-scroll-btn.scroll-left {
+    left: 0;
+}
+
+.tab-scroll-btn.scroll-right {
+    right: 0;
+}
+
+.tab-scroll-btn.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.tab-scroll-btn:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #353535;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.tab-scroll-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.tab-button {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #555;
+    padding: 0.65rem 1.25rem;
+    font-family: "Poppins", serif;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    outline: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.tab-button:hover {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #353535;
+    transform: translateY(-2px);
+}
+
+.tab-button.active {
+    background: 
+        radial-gradient(circle at 60% 40%, rgba(155, 212, 229, 0.4) 0%, rgba(95, 169, 212, 0.3) 60%),
+        linear-gradient(120deg, rgba(168, 213, 162, 0.35) 0%, rgba(214, 234, 199, 0.25) 50%, transparent 100%),
+        linear-gradient(200deg, rgba(248, 199, 216, 0.35) 15%, rgba(225, 196, 244, 0.3) 40%, transparent 80%),
+        linear-gradient(45deg, rgba(255, 244, 214, 0.3) 0%, rgba(252, 234, 187, 0.25) 30%, transparent 70%),
+        rgba(255, 255, 255, 0.4);
+    background-blend-mode: overlay, lighten, screen, normal, normal;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(155, 212, 229, 0.3);
+    color: #353535;
+    font-weight: 500;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media screen and (max-width: 768px) {
+    .tab-button {
+        padding: 0.55rem 0.9rem;
+        font-size: 13px;
+    }
+
+    .tab-scroll-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .tab-navigation-wrapper {
+        gap: 0.4rem;
+    }
+}
+
