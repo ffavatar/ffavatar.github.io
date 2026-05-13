@@ -88,7 +88,12 @@ background-blend-mode: overlay, lighten, screen, normal;">
                     </style>
                     <h1 class="title">FFAvatar: Few-Shot, Feedforward, and Generalizable Avatar Reconstruction</h1>
                     <p class="author" style="line-height: 1.8; margin-bottom: 0; padding: 0;">
-                        Thuan Hoang Nguyen, Jiahao Luo Yinyu Nie, Hao Li, Gordon Guocheng Qian, Jian Wang
+                        <a href="https://thuanz123.github.io/">Thuan Hoang Nguyen</a>, 
+                        <a href="https://jluo96.github.io/">Jiahao Luo</a>,
+                        <a href="https://yinyunie.github.io/">Yinyu Nie</a>
+                        <a href="https://hao-li.com/">Hao Li</a>, 
+                        <a href="https://guochengqian.github.io/">Gordon Guocheng Qian</a>, 
+                        <a href="https://jianwang-cmu.github.io/">Jian Wang</a>
                     </p>
                     <p class="abstract" style="text-align: justify;">
                       Avatar reconstruction has traditionally relied on per‑subject optimization requiring hours of computation or expensive preprocessing that severely limits its scalability. We introduce <em>FFAvatar</em>, a generalizable feedforward framework that reconstructs high-quality, animatable 3D Gaussian head avatars from few-shot unposed portrait images in seconds. <em>FFAvatar</em> fuses information from multiple source images into a unified canonical Gaussian representation through our Multi-View Query-Former network, which is then animated via FLAME parameters predicted end‑to‑end directly from pixels, eliminating the overhead of offline FLAME extraction. We further propose a three-stage training curriculum that achieves both broad generalization and high-fidelity reconstruction: (i) scalable pretraining on extensive monocular video data with over 1M identities to learn strong generalizable priors; (ii) multi-view fine‑tuning on a small but high-quality dataset of 360 degree captures to enhance geometric fidelity and extreme view awareness; and (iii) optional personalization that adapts to specific identities for maximum fidelity within 500 optimization steps. Extensive experiments demonstrate that <em>FFAvatar</em> sets a new standard for identity preservation, geometric consistency, and animation fidelity. On the NeRSemble benchmark, it outperforms the state-of-the-art LAM by a substantial 5.5 PSNR gain. Furthermore, <em>FFAvatar</em> enables real-time deployment, achieving 2 seconds and 10 seconds reconstruction without and with personalization, respectively, and 49 FPS animation on a single NVIDIA A100 GPU.
